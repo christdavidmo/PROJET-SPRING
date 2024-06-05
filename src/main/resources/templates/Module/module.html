@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/output.css" rel="stylesheet">
+
+
+    <style>
+        .container{
+
+            margin: 20px auto; /* Pour centrer horizontalement avec un espace autour */
+            display: inline-block; /* Permet au conteneur de s'adapter à la taille du contenu */
+            padding: 20px; /* Ajouter un peu d'espace intérieur */
+
+
+        }
+        #dateForm{
+
+            text-align: center;
+
+            border-radius: 10px; /* Rayon des coins */
+        }
+
+        label{
+            background-color: green; /* Couleur de fond du bouton */
+            padding:  10px 20px;
+            border-radius: 5px;
+            color:  white;
+            font-size: medium;
+        }
+
+        button[type="submit"] {
+            background-color: green; /* Couleur de fond du bouton */
+            color: #fff; /* Couleur du texte */
+            border: none; /* Supprimer la bordure */
+            padding: 10px 20px; /* Ajouter un peu d'espace intérieur */
+            border-radius: 5px; /* Rayon des coins */
+            cursor: pointer; /* Afficher un curseur de pointage */
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3; /* Couleur de fond au survol */
+        }
+    </style>
+
+</head>
+
+<body>
+
+<header th:include="shared/layout :: nav"></header>
+
+
+
+
+<h1 class="text-3xl font-bold underline">
+
+</h1>
+
+
+
+<div class="container">
+
+    <form id="search-form">
+
+        <label for="search-input">Rechercher le module :</label>
+
+        <input type="text" id="search-input" name="search" placeholder="Entrez le nom...">
+
+        <button type="submit">Rechercher</button>
+
+    </form>
+
+    <div id="search-results"></div>
+
+</div>
+
+
+
+<table class="border-separate border border-slate-400" style="width: 80%; height: 100%;">
+    <thead>
+    <tr>
+        <th class="border border-slate-300 ..."> ID</th>
+        <th class="border border-slate-300 ...">LIBELLE</th>
+        <th class="border border-slate-300 ...">COURS CORRESPONDANT</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+    <tr th:each="mo:${modules}" >
+        <td class="border border-slate-300 ..." th:text="${mo.id}"></td>
+        <td class="border border-slate-300 ..." th:text="${mo.libelle}"></td>
+        <td class="border border-slate-300 ...">
+            <a th:href="@{/module/cours/module/{idModule}(idModule=${mo.id})}" type="button" class="btn btn-warning">COURS</a>
+
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+<div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mx-auto">
+
+    <div class="flex flex-1 justify-between sm:hidden">
+        <li class="page-item">
+            <a th:class="${currentPage > 0 ? 'page-link' : 'page-link disabled'}" th:href="@{/module(page = ${currentPage - 1} )}">Précédent</a>
+        </li>
+        <li th:each="p,status:${pages}">
+            <a th:class="${status.index == currentPage ? 'page-link active' : 'page-link'}"
+               th:text="${status.index + 1}"
+               th:href="@{/module(page=${status.index})}"></a>
+        </li>
+        <li class="page-item">
+            <a th:class="${currentPage < (pages.length - 1) ? 'page-link' : 'page-link disabled'}"
+               th:href="@{/module(page = ${currentPage + 1})}">Suivant</a>
+        </li>
+    </div>
+
+    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+        <div>
+            <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+
+                    <a th:class="${currentPage > 0 ? 'page-link' : 'page-link disabled'}" th:href="@{/module(page = ${currentPage - 1} )}">Précédent</a>
+
+                <li th:each="p,status:${pages}">
+                    <a th:class="${status.index == currentPage ? 'page-link active' : 'page-link'}"
+                       th:text="${status.index + 1}"
+                       th:href="@{/module(page=${status.index})}"></a>
+                </li>
+
+                <li class="page-item">
+                    <a th:class="${currentPage < (pages.length - 1) ? 'page-link' : 'page-link disabled'}"
+                       th:href="@{/module(page = ${currentPage + 1})}">Suivant</a>
+                </li>
+            </nav>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

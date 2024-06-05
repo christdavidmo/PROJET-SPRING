@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/output.css" rel="stylesheet">
+
+</head>
+<body>
+
+
+<header th:include="shared/layout :: nav"></header>
+
+
+<h1 class="text-3xl font-bold underline">LA LISTE DES SESSIONS</h1>
+
+<div class="flex justify-center mb-4">
+    <button class="mr-2 px-4 py-2 bg-blue-500 text-white rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" id="btnAllCourses">TOUTES LES SESSIONS</button>
+    <button class="px-4 py-2 bg-green-500 text-white rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2" id="btnCompletedCourses">LES SESSIONS TERMINES</button>
+</div>
+
+
+<table class="border-separate border border-slate-400" style="width: 80%; height: 100%;">
+    <thead>
+    <tr>
+        <th class="border border-slate-300 ..."> ID</th>
+        <th class="border border-slate-300 ..."> DATE</th>
+        <th class="border border-slate-300 ...">NBR HEURE</th>
+        <th class="border border-slate-300 ...">HEURE DEBUT</th>
+        <th class="border border-slate-300 ...">HEURE FIN</th>
+        <th class="border border-slate-300 ...">LIEUX</th>
+        <th class="border border-slate-300 ...">DETAILS</th>
+        <th class="border border-slate-300 ...">DIVERS</th>
+
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="s:${sessions}">
+        <td class="border border-slate-300 ..." th:text="${s.id}"></td>
+        <td class="border border-slate-300 ..." th:text="${s.Date}"></td>
+        <td class="border border-slate-300 ..." th:text="${s.NbrHeure}"></td>
+        <td class="border border-slate-300 ..." th:text="${s.HeureDebut}"></td>
+        <td class="border border-slate-300 ..." th:text="${s.HeureFin}"></td>
+
+        <td class="border border-slate-300 ..." th:text="${s.modeSession == 1 ? 'EN PRESENTIEL' : 'EN LIGNE'}"></td>
+
+        <td class="border border-slate-300 ..."><button type="button" class="btn btn-secondary">DETAILS</button></td>
+        <td class="border border-slate-300 ..."><button type="button" class="btn btn-info"></button></td>
+    </tr>
+
+
+
+    </tbody>
+</table>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/output.css" rel="stylesheet">
+</head>
+<body>
+
+<header th:include="shared/layout :: nav"></header>
+<h1>La liste des cours </h1>
+
+<table class="border-separate border border-slate-400" style="width: 80%; height: 100%;">
+    <thead>
+    <tr>
+        <th class="border border-slate-300 ...">ID</th>
+        <th class="border border-slate-300 ...">HeureGlobal</th>
+        <th class="border border-slate-300 ...">HeureDeroule</th>
+        <th class="border border-slate-300 ...">HeureRestant</th>
+        <th class="border border-slate-300 ...">Semestre</th>
+        <th class="border border-slate-300 ...">Details</th>
+
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+      <tr th:each="co:${cours}">
+          <td class="border border-slate-300 ..." th:text="${co.id}"></td>
+          <td class="border border-slate-300 ..." th:text="${co.HeureGlobal}"></td>
+          <td class="border border-slate-300 ..." th:text="${co.HeureDeroule}"></td>
+          <td class="border border-slate-300 ..." th:text="${co.HeureRestant}"></td>
+          <td class="border border-slate-300 ..." th:text="${co.Semestre}"></td>
+          <td class="border border-slate-300 ...">
+              <a th:href="@{/cours/sessions/cours/{idCours}(idCours=${co.id})}" type="button" class="btn btn-warning">SESSION</a>
+
+          </td>
+
+
+
+
+
+      </tr>
+
+    </tbody>
+</table>
+
+
+
+</body>
+</html>
